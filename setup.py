@@ -4,7 +4,7 @@ import os
 version = '1.0'
 
 long_description = (
-    open('README.txt').read()
+    open('README.rst').read()
     + '\n' +
     'Contributors\n'
     '============\n'
@@ -38,7 +38,12 @@ setup(name='collective.exampledevtools',
           # -*- Extra requirements: -*-
           'five.grok',
       ],
-      extras_require={'test': ['plone.app.testing']},
+      extras_require={
+          'test': ['plone.app.testing'],
+          'develop': [
+              'Sphinx',
+              ],
+      },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
