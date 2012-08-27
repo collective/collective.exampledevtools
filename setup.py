@@ -36,6 +36,7 @@ setup(name='collective.exampledevtools',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'five.grok',
       ],
       extras_require={'test': ['plone.app.testing']},
       entry_points="""
