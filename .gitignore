@@ -21,3 +21,5 @@
 /htmlcov
 picked-versions.cfg
 .mr.developer.cfg
+src
+venvs
