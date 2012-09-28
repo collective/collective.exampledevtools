@@ -2,26 +2,22 @@
 Example Plone Developement Tools
 ********************************
 
-This package is created for the Plone Conf 2012 talk, Essential Development Tools. When developing a
-Plone product there are tools available which can ease development. This package will cover the technical
-aspects of the tools and how to apply them.
+This package is created for the Plone Conf 2012 talk, Essential Development Tools. This document
+discusses the tools that can be use during developtment. Snippets and examples are used to explain
+how to tools can be used.
 
-This document will show how to use the tools by using examples. It isn't guaranteed that the information
-here is up-to-date fot the please read the Collective Developer Manual.
-
-
-Setting up a project using templer (or paster)
-==============================================
-Templer is used for setting up Python eggs or buildouts. Paster is templers predecessor.
+Setting up Plone projects
+=========================
+When developing in Plon,e Templer is a tool which allows you to  generate code skeletons from
+pre-defined templates. Skeletons for Python eggs, buildouts and Plone products can be created
+using Templer.
 
 .. topic:: To pip or not to pip
     When installing templer via the pip installer it's possible that the installation of templer
     and dependencies will fail. To circumvent this use easy_install instead, this installer
     correctly installs templer and dependencies
 
-https://github.com/collective/ZopeSkel/issues/4
-
-This snipper shows how to install templer in a virtual environment:
+This snipper shows how to install templer in a virtual environment and list available skeletons:
 
     .. code-block:: console
 
@@ -31,36 +27,103 @@ This snipper shows how to install templer in a virtual environment:
         # easy_install templer.plone templer.plone.localcommands
         # templer --list
 
+This snippet shows how to create a Dexterity-based project with ZopeSkel. Templer does not yet
+have the functionality to create such projects:
 
+    .. code-block:: console
 
+        # virtualenv-2.7 dexterity-example
+        # cd dexterity-example
+        # . ./bin/activate
+        # easy_install ZopeSkel==2.21.2  Paste PasteDeploy PasteScript zopeskel.dexterity
+        # ./bin/zopeskel dexterity
+
+More information about Templer and ZopeSkel:
+
+ * http://blog.jazkarta.com/2012/07/12/templer-and-zopeskel/
+ * http://blog.aclark.net/2012/07/12/the-plones-templer/
 
 Speed up buildout
 =================
 
 .. figure:: http://fschulze.github.com/mr.developer/xkcd-buildout.png
 
+::
+
     Let Mr. Developer help you win the everlasting buildout battle!
+    (Remixed by Matt Hamilton, original from http://xkcd.com/303
 
-    (Remixed by Matt Hamilton, original from http://xkcd.com/303)
+When running a (fresh) buildout it can take while before it's finished. Using a few tricks it's possible
+  to increase the buildout speed.
 
-Use allow hosts in buildout to speed up downloading of eggs
-Use a default.cfg in your buildout to centralize eggs and download caches
+ * Use buildout.dumppickedversions 0.5 or later
+ * Use zc.buildout version 1.5 or later
+ * Use the -N option
+ * Clean out egg cache and use virtualenv
 
-Also see: http://blog.aclark.net/2012/08/13/bootstrapping-a-buildout-1-6-release/
+More detailed information about buildout performance improvements can be found here: http://rpatterson.net/blog/buildout-performance-improvements
 
-Creating buildouts and products using paster or templer
+Another way to speed up buildout is to restrict the which server can be used to download eggs. Using this
+restriction buildout is only allowed to connect to certain servers. When running a buildout without allowed
+hosts buildout can be slowed down on slow Python egg repositories.
+
+    .. code-block:: cfg
+
+        [buildout]
+        ...
+        allow-hosts =
+            pypi.python.org
+            dist.plone.org
+
+Alternatively a connection timeout can be set when running buildout:
+
+    .. code-block:: console
+
+        bin/buildout -t 5
 
 
 Manage development eggs with mr.developer
 =========================================
+The buildout extension `mr.developer <http://pypi.python.org/pypi/mr.developer>`_ manages development
+eggs in a buildout. When developing on a Plone project, Python eggs and/or Plone products can be added
+from a revision control repository such as Git or Subversion.
 
-Mr.developer helps with development eggs, auto-checkout and updating all eggs.
-Other tips and tricks
+Mr.developer usage has the following benefits opposed to a manual checkout:
 
-http://pypi.python.org/pypi/mr.developer
+ * When buildout is run for the first time the egg are automatically checked out. No need for a manual checkout of the development eggs.
+ * Bulk update the developement eggs
+ * More?...
 
-Automatically restart using sauna.reload
-========================================
+In the snippet below `collective.developermanual <http://collective-docs.readthedocs.org/>`_ is added as
+an develop egg:
+
+   .. code-block:: cfg
+
+        [buildout]
+        extensions =
+            mr.developer
+
+         sources = sources
+         # List products under development here
+         auto-checkout +=
+            https://github.com/collective/collective.developermanual.git
+
+        [sources]
+        collective.developermanual = git https://github.com/collective/collective.developermanual.git
+
+Alternatively a development egg can be given without using mr.developer.
+
+   .. code-block:: cfg
+
+        [buildout]
+
+        develop =
+            src/collective.developermanual
+
+Auto restart using sauna.reload
+===============================
+
+
 
 
 
@@ -76,12 +139,16 @@ Use plone.app.debugbar
 Dive into pdb when an error is raised using Products.PDBDebugMode
 =================================================================
 
+Products.PDBDebugMode
+
 Do the PDB anywhere in your Plone site with Clouseau
 ====================================================
 
 
-Debug a frozen instance using Products.signalstack
+Debug a frozen Plone site
 ==================================================
+ instance using Products.signalstack
+
 
 
 
