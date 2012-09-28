@@ -2,13 +2,16 @@
 Example Plone Developement Tools
 ********************************
 
-This package is created for the Plone Conf 2012 talk, Essential Development Tools. This document
-discusses the tools that can be use during developtment. Snippets and examples are used to explain
-how to tools can be used.
+This collective package is created for the Plone Conf 2012 talk, Essential Development Tools. This
+document discusses the tools that can be use during developtment. Snippets and examples are used to
+explain how to tools can be used.
+
+This document and the Plone conference talk is aimed at beginning and intermediate Plone developers. More
+experienced developer are probably familiar with mentoined development tools.
 
 Setting up Plone projects
 =========================
-When developing in Plon,e Templer is a tool which allows you to  generate code skeletons from
+When developing in Plone Templer is a tool which allows you to  generate code skeletons from
 pre-defined templates. Skeletons for Python eggs, buildouts and Plone products can be created
 using Templer.
 
@@ -81,7 +84,6 @@ Alternatively a connection timeout can be set when running buildout:
 
         bin/buildout -t 5
 
-
 Manage development eggs with mr.developer
 =========================================
 The buildout extension `mr.developer <http://pypi.python.org/pypi/mr.developer>`_ manages development
@@ -120,12 +122,28 @@ Alternatively a development egg can be given without using mr.developer.
         develop =
             src/collective.developermanual
 
-Auto restart using sauna.reload
-===============================
+Auto restart Plone using sauna.reload
+=====================================
+
+The Plone instance needs to be restarted when your source code is changed. The
+`sauna.reload <http://pypi.python.org/pypi/sauna.reload>`_ add-on automatically restarts
+Plone when source code is changed. This is a serious time saver when developing in Plone.
 
 
+Add sauna.reload to the (Plone) instance part of your buildout
+   .. code-block:: cfg
 
+        [instance]
+        zope-conf-additional = %import sauna.reload
+        eggs +=
+            sauna.reload
 
+When sauna.reload is installed, an environment variable with the path to the development eggs
+is given. This way sauna.reload knows which files need to be monitored for changes.
+
+    .. code-block:: console
+
+        # RELOAD_PATH=src/ bin/instance fg
 
 
 Use Omelette to create a unified directory structure of installed packaged

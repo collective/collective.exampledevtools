@@ -16,7 +16,7 @@ long_description = (
 
 setup(name='collective.exampledevtools',
       version=version,
-      description="An example of available eggs and buildout extensions that can be used during Product developement.",
+      description="This package is created for the Plone Conf 2012 talk, Essential Development Tools.",
       long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -24,9 +24,9 @@ setup(name='collective.exampledevtools',
         "Programming Language :: Python",
         ],
       keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      author='Kim Chee Leong, Goldmund, Wyldebeast & Wunderliebe',
+      author_email='leong@gw20e.com',
+      url='https://github.com/collective/collective.exampledevtools/',
       license='gpl',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
@@ -42,7 +42,7 @@ setup(name='collective.exampledevtools',
           'test': ['plone.app.testing'],
           'develop': [
               'Sphinx',
-              ],
+           ],
       },
       entry_points="""
       # -*- Entry points: -*-
