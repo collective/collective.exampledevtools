@@ -4,7 +4,8 @@ Example Plone Developement Tools
 
 This collective package is created for the Plone Conf 2012 talk, Essential Development Tools. This
 document discusses the tools that can be use during developtment. Snippets and examples are used to
-explain how to tools can be used.
+explain how to tools can be used. For further installation and configuration details for these tools
+please read the package details on pypi.python.org.
 
 This document and the Plone conference talk is aimed at beginning and intermediate Plone developers. More
 experienced developer are probably familiar with mentoined development tools.
@@ -145,27 +146,65 @@ is given. This way sauna.reload knows which files need to be monitored for chang
 
         # RELOAD_PATH=src/ bin/instance fg
 
+Omelette recipe
+===============
 
-Use Omelette to create a unified directory structure of installed packaged
-==========================================================================
-and 'use the source (luke)' to search in Plone core packages
+A Plone buildout has lots of namespaced packages, but they are clunky to navigate. The
+`collective.recipe.omelette <http://pypi.python.org/pypi//collective.recipe.omelette>`_
+buildout extension creates a directory structure which resembles the Python namespaces
+of the installed packages.
+
+The Omelette extension is useful when you need to find a certain piece of code
+in one of Plones packages. Simply by issueing a search (and mumbering 'Use the Source Luke')
+for a specific piece of code in the omelette directory.
+
+   .. code-block:: cfg
+
+        [buildout]
+        part += omelettte
+
+        [omelette]
+        recipe = collective.recipe.omelette
+        eggs = ${instance:eggs}
+
+Plone debug toolbar
+===================
+
+The `plone.app.debugtoolbar <http://pypi.python.org/pypi/plone.app.debugtoolbar>`_ provides
+a wealth of debug information about a running Plone instance. The toolbar gives information
+about the current object, request, workflow etc. etc. It provides an interactive Python prompt,
+allowing you to debug thru-the-web.
+
+To add the debug toolbar to Plone, add to the instance eggs and install it thru the quick
+installer.
 
 
-Use plone.app.debugbar
-======================
+Dummy mailhost
+==============
+Products.PrintingMailHost
 
-Dive into pdb when an error is raised using Products.PDBDebugMode
-=================================================================
+PDBDebugMode and Clouseau
+=========================
 
-Products.PDBDebugMode
+Both products are listed in one section, because they are deprececated. However,
+they can be useful when developing in older Plone versions.
 
-Do the PDB anywhere in your Plone site with Clouseau
-====================================================
+The `Products.PDBDebugMode <http://pypi.python.org/pypi/Products.PDBDebugMode>`_ package
+provides a post-mortem debugger on exceptions. When an exception happens the Python pdb
+debugger shows up in the terminal.
+
+`Products.Clouseau <http://pypi.python.org/pypi/Products.Clouseau>`_ provides a interactive
+Python prompt from a Plone site. The plone.app.debugtoolbar also provides this functionality,
+it's recommended to use the debugtoolbar.
 
 
 Debug a frozen Plone site
-==================================================
- instance using Products.signalstack
+=========================
+
+http://pypi.python.org/pypi/mr.freeze
+http://pypi.python.org/pypi/Products.signalstack
+http://pypi.python.org/pypi/ZopeHealthWatcher/
+
 
 
 
