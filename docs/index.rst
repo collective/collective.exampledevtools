@@ -170,8 +170,8 @@ Debug a frozen Plone site
 
 
 
-Ease the releasing of eggs with jarn.mkrelease or zest.mkrelease
-================================================================
+Ease the releasing of eggs with jarn.mkrelease or zest.releaser
+===============================================================
 
 
 Run your tests on jenkins or travis.ci for continious integration
