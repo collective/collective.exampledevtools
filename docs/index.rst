@@ -175,13 +175,27 @@ a wealth of debug information about a running Plone instance. The toolbar gives 
 about the current object, request, workflow etc. etc. It provides an interactive Python prompt,
 allowing you to debug thru-the-web.
 
-To add the debug toolbar to Plone, add to the instance eggs and install it thru the quick
+To add the debug toolbar to Plone: add the package to the instance eggs and install it thru the quick
 installer.
-
 
 Dummy mailhost
 ==============
-Products.PrintingMailHost
+When developing the `Products.PrintingMailHost <http://pypi.python.org/pypi/Products.PrintingMailHost>`_
+can be used to display e-mails sent from Plone on standard out. It monkey patches the Zope MailHost,
+preventing mails to be sent out and printing the mail in the terminal.
+
+::
+
+    This is useful if you don't have a local mailhost for testing, or if you prefer not to spam
+    the crap out of yourself whilst finding out if your bulk mail script is working.
+
+To add the debug toolbar to Plone: add the package to the instance eggs.
+
+Alternatively a dummy mail server can be run, which also displays mails on standard out:
+
+   .. code-block:: console
+
+        python -m smtpd -n -c DebuggingServer localhost:1025
 
 PDBDebugMode and Clouseau
 =========================
@@ -197,17 +211,21 @@ debugger shows up in the terminal.
 Python prompt from a Plone site. The plone.app.debugtoolbar also provides this functionality,
 it's recommended to use the debugtoolbar.
 
+plone.reload?
 
 Debug a frozen Plone site
 =========================
 
-http://pypi.python.org/pypi/mr.freeze
-http://pypi.python.org/pypi/Products.signalstack
-http://pypi.python.org/pypi/ZopeHealthWatcher/
+It's worrying when a Plone instance has become completely unresponsive (ie frozen by a deadlock).
+There are multiple packages available to debug a frozen Plone instance. All packages have in common
+that they can read out a stacktrace, allowing to pin point the cause of the freeze.
 
+`Mr.freeze <http://pypi.python.org/pypi/mr.freeze>`_  can do several things. Provide a stacktrace
+of the frozen instance, drop Zope to a pdb debug prompt and reload the source code or zcml.
 
-
-
+`Products.signalstack <http://pypi.python.org/pypi/Products.signalstack>`_ is the predecessor of
+mr.freeze. It has one function and that is dumping a stacktrace to the Zope log when a USR1
+kill signal is sent.
 
 Ease the releasing of eggs with jarn.mkrelease or zest.releaser
 ===============================================================
