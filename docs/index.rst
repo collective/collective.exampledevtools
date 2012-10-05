@@ -242,7 +242,7 @@ Run your tests on jenkins or travis.ci for continious integration
 =================================================================
 
 Assuming you've created unit, functional and/or doc tests for a Plone package (which you should do), the next step
-is to run those test using continuous integration (CI). This means that the tests are run in a certain interval. If a test
+is to run those test using continuous integration (CI). This means that the tests are run at a certain interval. If a test
 is failing a notification is sent out by email.
 
 If you haven't created tests for your package you can read the `'Testing and debugging' document on readthedocs <http://collective-docs.readthedocs.org/en/latest/testing_and_debugging/index.html>`_.
