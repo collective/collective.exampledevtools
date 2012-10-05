@@ -3,7 +3,7 @@ Example Plone Developement Tools
 ********************************
 
 This collective package is created for the Plone Conf 2012 talk, Essential Development Tools. This
-document discusses the tools that can be use during developtment. Snippets and examples are used to
+document discusses the tools that can be used during development. Snippets and examples are used to
 explain how to tools can be used. For further installation and configuration details for these tools
 please read the package details on pypi.python.org.
 
@@ -21,7 +21,7 @@ using Templer.
     and dependencies will fail. To circumvent this use easy_install instead, this installer
     correctly installs templer and dependencies
 
-This snipper shows how to install templer in a virtual environment and list available skeletons:
+This snippet shows how to install templer in a virtual environment and list available skeletons:
 
     .. code-block:: console
 
@@ -42,10 +42,9 @@ have the functionality to create such projects:
         # easy_install ZopeSkel==2.21.2  Paste PasteDeploy PasteScript zopeskel.dexterity
         # ./bin/zopeskel dexterity
 
-More information about Templer and ZopeSkel:
+More information about creating an add-on packages can be found in this `getting started
+document on readthedocs <http://collective-docs.readthedocs.org/en/latest/getstarted/index.html#creating-your-first-add-on>`_.
 
- * http://blog.jazkarta.com/2012/07/12/templer-and-zopeskel/
- * http://blog.aclark.net/2012/07/12/the-plones-templer/
 
 Speed up buildout
 =================
@@ -57,12 +56,11 @@ Speed up buildout
     Let Mr. Developer help you win the everlasting buildout battle!
     (Remixed by Matt Hamilton, original from http://xkcd.com/303
 
-When running a (fresh) buildout it can take while before it's finished. Using a few tricks it's possible
-  to increase the buildout speed.
+When running a (fresh) buildout it can take while before it's finished. Using a few tricks it's possible to increase the buildout speed.
 
  * Use buildout.dumppickedversions 0.5 or later
  * Use zc.buildout version 1.5 or later
- * Use the -N option
+ * Use the -N option, buildout will not seek for packages with new versions
  * Clean out egg cache and use virtualenv
 
 More detailed information about buildout performance improvements can be found here: http://rpatterson.net/blog/buildout-performance-improvements
@@ -95,7 +93,7 @@ Mr.developer usage has the following benefits opposed to a manual checkout:
 
  * When buildout is run for the first time the egg are automatically checked out. No need for a manual checkout of the development eggs.
  * Bulk update the developement eggs
- * More?...
+ * Many `options for managing packages <http://pypi.python.org/pypi/mr.developer#commands>`_ from a version control system
 
 In the snippet below `collective.developermanual <http://collective-docs.readthedocs.org/>`_ is added as
 an develop egg:
@@ -114,7 +112,7 @@ an develop egg:
         [sources]
         collective.developermanual = git https://github.com/collective/collective.developermanual.git
 
-Alternatively a development egg can be given without using mr.developer.
+Alternatively a development egg can be given in buildout configuration without using mr.developer.
 
    .. code-block:: cfg
 
@@ -149,14 +147,12 @@ is given. This way sauna.reload knows which files need to be monitored for chang
 Omelette recipe
 ===============
 
-A Plone buildout has lots of namespaced packages, but they are clunky to navigate. The
-`collective.recipe.omelette <http://pypi.python.org/pypi//collective.recipe.omelette>`_
-buildout extension creates a directory structure which resembles the Python namespaces
-of the installed packages.
+Within a Plone buildout there are lots of namespaced packages, in a default buildout there is no easy way to navigate or
+search for a specific part of code. The `collective.recipe.omelette <http://pypi.python.org/pypi//collective.recipe.omelette>`_
+buildout extension creates a directory structure which resembles the Python namespaces of the installed packages.
 
-The Omelette extension is useful when you need to find a certain piece of code
-in one of Plones packages. Simply by issueing a search (and mumbering 'Use the Source Luke')
-for a specific piece of code in the omelette directory.
+This directory structure from omelette makes it easy to navigate in the packages and to issue a search (and
+mumbering 'Use the Source Luke') for a specific piece of code in the omelette directory.
 
    .. code-block:: cfg
 
@@ -171,7 +167,7 @@ Plone debug toolbar
 ===================
 
 The `plone.app.debugtoolbar <http://pypi.python.org/pypi/plone.app.debugtoolbar>`_ provides
-a wealth of debug information about a running Plone instance. The toolbar gives information
+a wealth of development and debugging information about a running Plone site. The toolbar gives information
 about the current object, request, workflow etc. etc. It provides an interactive Python prompt,
 allowing you to debug thru-the-web.
 
@@ -180,8 +176,8 @@ installer.
 
 Dummy mailhost
 ==============
-When developing the `Products.PrintingMailHost <http://pypi.python.org/pypi/Products.PrintingMailHost>`_
-can be used to display e-mails sent from Plone on standard out. It monkey patches the Zope MailHost,
+When developing the `Products.PrintingMailHost <http://pypi.python.org/pypi/Products.PrintingMailHost>`_ add-on
+can be used to display e-mails sent from Plone on standard out. PrintingMailHost monkey patches the Zope MailHost,
 preventing mails to be sent out and printing the mail in the terminal.
 
 ::
@@ -197,11 +193,11 @@ Alternatively a dummy mail server can be run, which also displays mails on stand
 
         python -m smtpd -n -c DebuggingServer localhost:1025
 
-PDBDebugMode and Clouseau
-=========================
+Deprecated tools
+================
 
-Both products are listed in one section, because they are deprececated. However,
-they can be useful when developing in older Plone versions.
+The development tools mentioned in this section are deprecated. However they can be useful
+when developing in older Plone versions (that is Plone 3 and older verions).
 
 The `Products.PDBDebugMode <http://pypi.python.org/pypi/Products.PDBDebugMode>`_ package
 provides a post-mortem debugger on exceptions. When an exception happens the Python pdb
@@ -211,7 +207,9 @@ debugger shows up in the terminal.
 Python prompt from a Plone site. The plone.app.debugtoolbar also provides this functionality,
 it's recommended to use the debugtoolbar.
 
-plone.reload?
+
+`plone.reload <http://pypi.python.org/pypi/plone.reload>`_ allows reloading of source code and zcml
+without server restarts. This package is succeeded by sauna.reload for the latest version of Plone.
 
 Debug a frozen Plone site
 =========================
@@ -227,11 +225,33 @@ of the frozen instance, drop Zope to a pdb debug prompt and reload the source co
 mr.freeze. It has one function and that is dumping a stacktrace to the Zope log when a USR1
 kill signal is sent.
 
-Ease the releasing of eggs with jarn.mkrelease or zest.releaser
+Releasing eggs with jarn.mkrelease or zest.releaser
 ===============================================================
 
+Releasing an egg to a Python egg index server (such as pypi.python.org) involves multiple steps: bumping the
+version number, updating the history/changes file, tagging the release in version control,
+creating the egg and uploading the egg to the index server.
+
+Both `jarn.mkrelease <http://pypi.python.org/pypi/jarn.mkrelease>`_ and `zest.releaser <http://pypi.python.org/pypi/zest.releaser>`_ facilitate in releasing an Python egg. If you want to release an egg it's easy to use one of these
+release helper tools.
+
+If you want to follow all steps mentioned in the release flow above, zest.release is more extensive than
+jarn.mkrelease. However is you only want to tag, package and upload the release jarn.mkrelease seems more fit.
 
 Run your tests on jenkins or travis.ci for continious integration
 =================================================================
 
+Assuming you've created unit, functional and/or doc tests for a Plone package (which you should do), the next step
+is to run those test using continuous integration (CI). This means that the tests are run in a certain interval. If a test
+is failing a notification is sent out by email.
 
+If you haven't created tests for your package you can read the `'Testing and debugging' document on readthedocs <http://collective-docs.readthedocs.org/en/latest/testing_and_debugging/index.html>`_.
+
+Two tools are available for CI in Plone, `Travis CI <https://travis-ci.org/>`_ and `Jenkins CI <http://jenkins-ci.org/>`_.
+
+The Travis CI tool is offered as software as a service. Travis offers CI for open source projects hosted on GitHub.
+
+Jenkins CI is a tool which can be installed on a server. Because Travis doesn't support CI for internal projects
+(such as closed source/proprietary software) Jenkins CI can be used for those projects. When testing projects in Jenkins
+the add-on `collective.xmltestreport <http://pypi.python.org/pypi/collective.xmltestreport>`_ can be used to output which
+tests are run.
