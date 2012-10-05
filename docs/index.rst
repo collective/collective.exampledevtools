@@ -107,7 +107,7 @@ an develop egg:
          sources = sources
          # List products under development here
          auto-checkout +=
-            https://github.com/collective/collective.developermanual.git
+            collective.developermanual 
 
         [sources]
         collective.developermanual = git https://github.com/collective/collective.developermanual.git
