@@ -7,21 +7,21 @@ document discusses the tools that can be used during development. Snippets and e
 explain how to tools can be used. For further installation and configuration details for these tools
 please read the package details on pypi.python.org.
 
-This document and the Plone conference talk is aimed at beginning and intermediate Plone developers. More
-experienced developer are probably familiar with mentoined development tools.
+This document and the Plone conference talk aims at novice and intermediate Plone developers. More
+experienced developers will probably be familiar with the development tools mentioned.
 
 Setting up Plone projects
 =========================
-When developing in Plone Templer is a tool which allows you to  generate code skeletons from
+When developing in Plone, templer is a tool that allows you to generate code skeletons from
 pre-defined templates. Skeletons for Python eggs, buildouts and Plone products can be created
 using Templer.
 
 .. topic:: To pip or not to pip
-    When installing templer via the pip installer it's possible that the installation of templer
-    and dependencies will fail. To circumvent this use easy_install instead, this installer
-    correctly installs templer and dependencies
+    When installing Templer via the pip installer, it's possible that the installation of templer
+    and its dependencies will fail. To circumvent this, use easy_install instead. This installer
+    will install templer and its dependencies correctly.
 
-This snippet shows how to install templer in a virtual environment and list available skeletons:
+This snippet shows how to install templer in a virtual environment and list the available skeletons:
 
     .. code-block:: console
 
@@ -67,7 +67,7 @@ More detailed information about buildout performance improvements can be found h
 
 Another way to speed up buildout is to restrict the which server can be used to download eggs. Using this
 restriction buildout is only allowed to connect to certain servers. When running a buildout without allowed
-hosts buildout can be slowed down on slow Python egg repositories.
+hosts, buildout can be slowed down on slow Python egg repositories.
 
     .. code-block:: cfg
 
@@ -89,13 +89,13 @@ The buildout extension `mr.developer <http://pypi.python.org/pypi/mr.developer>`
 eggs in a buildout. When developing on a Plone project, Python eggs and/or Plone products can be added
 from a revision control repository such as Git or Subversion.
 
-Mr.developer usage has the following benefits opposed to a manual checkout:
+The use of Mr.developer has the following benefits opposed to a manual checkout:
 
- * When buildout is run for the first time the egg are automatically checked out. No need for a manual checkout of the development eggs.
- * Bulk update the developement eggs
+ * When buildout is run for the first time, the eggs will automatically be checked out. No need for a manual checkout of the development eggs.
+ * Bulk update the development eggs
  * Many `options for managing packages <http://pypi.python.org/pypi/mr.developer#commands>`_ from a version control system
 
-In the snippet below `collective.developermanual <http://collective-docs.readthedocs.org/>`_ is added as
+In the snippet below, `collective.developermanual <http://collective-docs.readthedocs.org/>`_ is added as
 an develop egg:
 
    .. code-block:: cfg
@@ -112,7 +112,7 @@ an develop egg:
         [sources]
         collective.developermanual = git https://github.com/collective/collective.developermanual.git
 
-Alternatively a development egg can be given in buildout configuration without using mr.developer.
+Alternatively, a development egg can be inserted in buildout configuration without using mr.developer.
 
    .. code-block:: cfg
 
@@ -126,7 +126,7 @@ Auto restart Plone using sauna.reload
 
 The Plone instance needs to be restarted when your source code is changed. The
 `sauna.reload <http://pypi.python.org/pypi/sauna.reload>`_ add-on automatically restarts
-Plone when source code is changed. This is a serious time saver when developing in Plone.
+Plone when source code was changed. This is a serious time saver when developing in Plone.
 
 
 Add sauna.reload to the (Plone) instance part of your buildout
@@ -138,7 +138,7 @@ Add sauna.reload to the (Plone) instance part of your buildout
             sauna.reload
 
 When sauna.reload is installed, an environment variable with the path to the development eggs
-is given. This way sauna.reload knows which files need to be monitored for changes.
+needs to be included. This way, sauna.reload knows which files need to be monitored for changes.
 
     .. code-block:: console
 
@@ -147,11 +147,11 @@ is given. This way sauna.reload knows which files need to be monitored for chang
 Omelette recipe
 ===============
 
-Within a Plone buildout there are lots of namespaced packages, in a default buildout there is no easy way to navigate or
+Within a Plone buildout there are lots of namespaced packages. In a default buildout there is no easy way to navigate or
 search for a specific part of code. The `collective.recipe.omelette <http://pypi.python.org/pypi//collective.recipe.omelette>`_
 buildout extension creates a directory structure which resembles the Python namespaces of the installed packages.
 
-This directory structure from omelette makes it easy to navigate in the packages and to issue a search (and
+This directory structure from omelette makes it easy to navigate in the packages and also makes it easy to issue a search (and
 mumbering 'Use the Source Luke') for a specific piece of code in the omelette directory.
 
    .. code-block:: cfg
@@ -171,7 +171,7 @@ a wealth of development and debugging information about a running Plone site. Th
 about the current object, request, workflow etc. etc. It provides an interactive Python prompt,
 allowing you to debug thru-the-web.
 
-To add the debug toolbar to Plone: add the package to the instance eggs and install it thru the quick
+To add the debug toolbar to Plone: add the package to the instance eggs and install it using the quick
 installer.
 
 Dummy mailhost
@@ -197,15 +197,15 @@ Deprecated tools
 ================
 
 The development tools mentioned in this section are deprecated. However they can be useful
-when developing in older Plone versions (that is Plone 3 and older verions).
+when developing in older Plone versions (that is Plone 3 and older).
 
 The `Products.PDBDebugMode <http://pypi.python.org/pypi/Products.PDBDebugMode>`_ package
 provides a post-mortem debugger on exceptions. When an exception happens the Python pdb
 debugger shows up in the terminal.
 
-`Products.Clouseau <http://pypi.python.org/pypi/Products.Clouseau>`_ provides a interactive
-Python prompt from a Plone site. The plone.app.debugtoolbar also provides this functionality,
-it's recommended to use the debugtoolbar.
+`Products.Clouseau <http://pypi.python.org/pypi/Products.Clouseau>`_ provides an interactive
+Python prompt from a Plone site. The plone.app.debugtoolbar also provides this functionality.
+It's recommended to use the debugtoolbar.
 
 
 `plone.reload <http://pypi.python.org/pypi/plone.reload>`_ allows reloading of source code and zcml
@@ -216,7 +216,7 @@ Debug a frozen Plone site
 
 It's worrying when a Plone instance has become completely unresponsive (ie frozen by a deadlock).
 There are multiple packages available to debug a frozen Plone instance. All packages have in common
-that they can read out a stacktrace, allowing to pin point the cause of the freeze.
+that they can read out a stacktrace, allowing to pinpoint the cause of the freeze.
 
 `Mr.freeze <http://pypi.python.org/pypi/mr.freeze>`_  can do several things. Provide a stacktrace
 of the frozen instance, drop Zope to a pdb debug prompt and reload the source code or zcml.
@@ -232,11 +232,11 @@ Releasing an egg to a Python egg index server (such as pypi.python.org) involves
 version number, updating the history/changes file, tagging the release in version control,
 creating the egg and uploading the egg to the index server.
 
-Both `jarn.mkrelease <http://pypi.python.org/pypi/jarn.mkrelease>`_ and `zest.releaser <http://pypi.python.org/pypi/zest.releaser>`_ facilitate in releasing an Python egg. If you want to release an egg it's easy to use one of these
+Both `jarn.mkrelease <http://pypi.python.org/pypi/jarn.mkrelease>`_ and `zest.releaser <http://pypi.python.org/pypi/zest.releaser>`_ facilitate in releasing a Python egg. If you want to release an egg, it's easy to use one of these
 release helper tools.
 
 If you want to follow all steps mentioned in the release flow above, zest.release is more extensive than
-jarn.mkrelease. However is you only want to tag, package and upload the release jarn.mkrelease seems more fit.
+jarn.mkrelease. However, if you only want to tag, package and upload the release, jarn.mkrelease seems more fit.
 
 Run your tests on jenkins or travis.ci for continious integration
 =================================================================
@@ -252,6 +252,6 @@ Two tools are available for CI in Plone, `Travis CI <https://travis-ci.org/>`_ a
 The Travis CI tool is offered as software as a service. Travis offers CI for open source projects hosted on GitHub.
 
 Jenkins CI is a tool which can be installed on a server. Because Travis doesn't support CI for internal projects
-(such as closed source/proprietary software) Jenkins CI can be used for those projects. When testing projects in Jenkins
+(such as closed source/proprietary software), Jenkins CI can be used for those projects. When testing projects in Jenkins
 the add-on `collective.xmltestreport <http://pypi.python.org/pypi/collective.xmltestreport>`_ can be used to output which
 tests are run.
