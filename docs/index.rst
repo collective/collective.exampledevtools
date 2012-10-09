@@ -174,6 +174,17 @@ allowing you to debug thru-the-web.
 To add the debug toolbar to Plone: add the package to the instance eggs and install it thru the quick
 installer.
 
+Plone theming
+=============
+
+Using the latest version (1.1a2 or newer) of `plone.app.theming <http://pypi.python.org/pypi/plone.app.theming>`_
+themes can be created and modified thru-the-web. Plone.app.theming uses `Diazo <http://docs.diazo.org/en/latest/index.html>`_
+to apply themes in Plone.
+
+A theme can be downloaded as zip file and uploaded in the theme settings page. Themes can be switched thru the theme
+settings page. On pypi.python there is a `list of
+downloadable themes <http://pypi.python.org/pypi?%3Aaction=search&term=plonetheme&submit=search>`_.
+
 Dummy mailhost
 ==============
 When developing the `Products.PrintingMailHost <http://pypi.python.org/pypi/Products.PrintingMailHost>`_ add-on
