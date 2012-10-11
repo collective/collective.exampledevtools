@@ -2,8 +2,9 @@
 Example Plone Developement Tools
 ********************************
 
-This collective package is created for the Plone Conf 2012 talk, Essential Development Tools. This
-document discusses the tools that can be used during development. Snippets and examples are used to
+This collective package is created for the 
+`Plone Conf 2012 talk, Essential Development Tools <http://www.slideshare.net/kaceeleong/plone-conf-2012-essential-dev-tools>`_. 
+This document discusses the tools that can be used during development. Snippets and examples are used to
 explain how to tools can be used. For further installation and configuration details for these tools
 please read the package details on pypi.python.org.
 
