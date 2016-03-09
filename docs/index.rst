@@ -250,7 +250,7 @@ release helper tools.
 If you want to follow all steps mentioned in the release flow above, zest.release is more extensive than
 jarn.mkrelease. However, if you only want to tag, package and upload the release, jarn.mkrelease suffices.
 
-Run your tests on jenkins or travis.ci for continious integration
+Run your tests on jenkins or travis.ci for continuous integration
 =================================================================
 
 Assuming you've created unit, functional and/or doc tests for a Plone package (which you should do), the next step
